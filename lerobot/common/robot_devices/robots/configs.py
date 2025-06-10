@@ -26,6 +26,7 @@ from lerobot.common.robot_devices.cameras.configs import (
 from lerobot.common.robot_devices.motors.configs import (
     DynamixelMotorsBusConfig,
     FeetechMotorsBusConfig,
+    StaraiMotorsBusConfig,
     MotorsBusConfig,
 )
 
@@ -670,6 +671,70 @@ class LeKiwiRobotConfig(RobotConfig):
             "speed_down": "f",
             # quit teleop
             "quit": "q",
+        }
+    )
+
+    mock: bool = False
+
+@RobotConfig.register_subclass("starai")
+@dataclass
+class StaraiRobotConfig(ManipulatorRobotConfig):
+    calibration_dir: str = ".cache/calibration/starai"
+    # `max_relative_target` limits the magnitude of the relative positional target vector for safety purposes.
+    # Set this to a positive scalar to have the same value for all motors, or a list that is the same length as
+    # the number of motors in your follower arms.
+    max_relative_target: int | None = None
+
+    leader_arms: dict[str, MotorsBusConfig] = field(
+        default_factory=lambda: {
+            "main": StaraiMotorsBusConfig(
+                port="/dev/ttyUSB1",
+                motors={
+                    # name: (index, model)
+                    "joint1": [0, "rx8-u50"],
+                    "joint2": [1, "rx8-u50"],
+                    "joint3": [2, "rx8-u50"],
+                    "joint4": [3, "rx8-u50"],
+                    "joint5": [4, "rx8-u50"],
+                    "joint6": [5, "rx8-u50"],
+                    "gripper": [6, "rx8-u50"],
+                },
+            ),
+        }
+    )
+
+    follower_arms: dict[str, MotorsBusConfig] = field(
+        default_factory=lambda: {
+            "main": StaraiMotorsBusConfig(
+                port="/dev/ttyUSB0",
+                motors={
+                    # name: (index, model)
+                    "joint1": [0, "rx8-u50"],
+                    "joint2": [1, "rx8-u50"],
+                    "joint3": [2, "rx8-u50"],
+                    "joint4": [3, "rx8-u50"],
+                    "joint5": [4, "rx8-u50"],
+                    "joint6": [5, "rx8-u50"],
+                    "gripper": [6, "rx8-u50"],
+                },
+            ),
+        }
+    )
+
+    cameras: dict[str, CameraConfig] = field(
+        default_factory=lambda: {
+            "laptop": OpenCVCameraConfig(
+                camera_index=2,
+                fps=30,
+                width=640,
+                height=480,
+            ),
+            "phone": OpenCVCameraConfig(
+                camera_index=0,
+                fps=30,
+                width=640,
+                height=480,
+            ),
         }
     )
 

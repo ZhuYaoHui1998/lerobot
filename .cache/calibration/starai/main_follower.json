@@ -1,0 +1,1 @@
+{"homing_offset": [0.0, 5.9, 0.0, 0.0, 0.0, 0.0, 0.0], "start_pos": [-2.9, -104.4, -93.0, -2.2, -14.1, 11.3, 0.0], "end_pos": [-3.2, -104.3, 89.4, -1.7, 27.9, 4.6, -78.3], "calib_mode": ["DEGREE", "DEGREE", "DEGREE", "DEGREE", "DEGREE", "DEGREE", "LINEAR"], "motor_names": ["joint1", "joint2", "joint3", "joint4", "joint5", "joint6", "gripper"]}

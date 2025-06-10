@@ -245,7 +245,8 @@ class ManipulatorRobot:
             from lerobot.common.robot_devices.motors.dynamixel import TorqueMode
         elif self.robot_type in ["so100", "so101", "moss", "lekiwi"]:
             from lerobot.common.robot_devices.motors.feetech import TorqueMode
-
+        elif self.robot_type in ["starai"]:
+            from lerobot.common.robot_devices.motors.starai import TorqueMode
         # We assume that at connection time, arms are in a rest position, and torque can
         # be safely disabled to run calibration and/or set robot preset configurations.
         for name in self.follower_arms:
@@ -320,6 +321,13 @@ class ManipulatorRobot:
 
                     calibration = run_arm_manual_calibration(arm, self.robot_type, name, arm_type)
 
+                elif self.robot_type in ["starai"]:
+                    from lerobot.common.robot_devices.robots.starai_calibration import (
+                        run_arm_calibration,
+                    )
+
+                    calibration = run_arm_calibration(arm, self.robot_type, name, arm_type)
+                    
                 print(f"Calibration is done! Saving calibration file '{arm_calib_path}'")
                 arm_calib_path.parent.mkdir(parents=True, exist_ok=True)
                 with open(arm_calib_path, "w") as f:

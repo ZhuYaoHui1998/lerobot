@@ -25,6 +25,7 @@ from lerobot.common.robot_devices.robots.configs import (
     So100RobotConfig,
     So101RobotConfig,
     StretchRobotConfig,
+    StaraiRobotConfig
 )
 
 
