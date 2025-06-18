@@ -338,7 +338,7 @@ class SmolVLAPolicy(PreTrainedPolicy):
         # For backward pass
         loss = losses.mean()
         # For backward pass
-        loss_dict["loss"] = loss.item()
+        loss_dict["loss"] = loss
         return loss, loss_dict
 
     def prepare_images(self, batch):
