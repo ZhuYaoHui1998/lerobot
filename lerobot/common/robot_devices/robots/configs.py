@@ -22,6 +22,7 @@ from lerobot.common.robot_devices.cameras.configs import (
     CameraConfig,
     IntelRealSenseCameraConfig,
     OpenCVCameraConfig,
+    OrbbecCameraConfig, 
 )
 from lerobot.common.robot_devices.motors.configs import (
     DynamixelMotorsBusConfig,
@@ -487,6 +488,12 @@ class So101RobotConfig(ManipulatorRobotConfig):
                 fps=30,
                 width=640,
                 height=480,
+            ),
+            "Orbbec":OrbbecCameraConfig(   
+                fps=30,
+                use_depth=True,         
+                width = 640,             
+                Hi_resolution_mode = False,
             ),
         }
     )
